@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/snabb/sitemap"
 )
 
 var baseURL string = "https://www.truthfinder.com/people-search"
@@ -62,5 +64,22 @@ func main() {
 		}
 	}
 
-	fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps, mapOfSitemapContents)
+	// create a sitemap index
+	// icm-ppl10-sitemap.xml
+	sitemapIndex := sitemap.NewSitemapIndex()
+	for ind := range mapOfSitemapContents {
+		sitemapIndex.Add(&sitemap.URL{
+			Loc: fmt.Sprintf("icm-ppl%v-sitemap.xml", ind),
+		})
+	}
+
+	// create a sitemap for every index of the map
+	// for _, el := range mapOfSitemapContents {
+
+	// }
+
+	// add each sitemap to the sitemap index
+
+	fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps, mapOfSitemapContents[0][2])
+	sitemapIndex.WriteTo(os.Stdout)
 }
