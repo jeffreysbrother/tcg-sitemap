@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
+
+var baseURL string = "https://www.truthfinder.com/people-search"
 
 func readLines(path string) ([]string, error) {
 	file, err := os.Open(path)
@@ -31,8 +34,9 @@ func main() {
 
 	// analyze CSV file to see how many blocks of 49,000 entires there are
 	countNames := len(sliceOfCSVLines)
-	completeBlocks := countNames / 49999
-	partialBlock := countNames % 49999
+	maxPerSitemap := 49999
+	completeBlocks := countNames / maxPerSitemap
+	partialBlock := countNames % maxPerSitemap
 	var totalSitemaps int
 
 	if partialBlock != 0 {
@@ -41,27 +45,32 @@ func main() {
 		totalSitemaps = completeBlocks
 	}
 
+	// sitemapCounter := 0
+	// arrayIndexCounter := 0
+
 	// create map of slices corresponding to each sitemap's content
-	var sitemapBlocks = make(map[int][]string, totalSitemaps)
-	var keys []string
+	mapOfSitemapContents := make(map[int][]string)
+	mapIndex := 0
 
-	// populate map with sitemap content
-	var sitemapCounter int
-	var keysCounter int
+	for ind, el := range sliceOfCSVLines {
+		sliceOfStrings := strings.Split(el, ",")
+		sliceNames := sliceOfStrings[:len(sliceOfStrings)-1]
 
-	for i := 0; i < countNames; i++ {
-		if sitemapCounter < sitemapCounter*49999+49999 {
-			keys[keysCounter] = sliceOfCSVLines[i]
-			keysCounter++
+		url := fmt.Sprintf("%v/%v-%v/", baseURL, strings.ToLower(sliceNames[1]), strings.ToLower(sliceNames[0]))
+		if ind < (maxPerSitemap*mapIndex + maxPerSitemap) {
+			mapOfSitemapContents[mapIndex] = append(mapOfSitemapContents[mapIndex], url)
+		} else {
+			mapIndex++
 		}
-		sitemapBlocks[sitemapCounter] = keys
-		sitemapCounter++
-		keysCounter = 0
 	}
 
-	fmt.Println(len(sitemapBlocks))
+	fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps, mapOfSitemapContents)
 
-	// fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps)
+	// var sitemapBlocks = make(map[int][]string, totalSitemaps)
+	// var keys []string
+
+	// populate map with sitemap content
+
 	// for k := range sitemapBlocks {
 	// 	fmt.Println(sitemapBlocks[k])
 	// }
