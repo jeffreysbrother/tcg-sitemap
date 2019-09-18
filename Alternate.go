@@ -65,7 +65,7 @@ func main() {
 	}
 
 	// create a sitemap index
-	// icm-ppl10-sitemap.xml
+	// naming convention: icm-ppl10-sitemap.xml
 	sitemapIndex := sitemap.NewSitemapIndex()
 	for ind := range mapOfSitemapContents {
 		sitemapIndex.Add(&sitemap.URL{
