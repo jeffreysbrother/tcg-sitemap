@@ -29,12 +29,12 @@ func readLines(path string) ([]string, error) {
 
 func main() {
 	// read argument (file name)
-	fileNameCSV := os.Args[1]
+	csvFile := os.Args[1]
 
 	// TODO: handle error if user doesn't pass an arg or passes too many
 
 	// read CSV file
-	sliceOfCSVLines, err := readLines(fileNameCSV)
+	sliceOfCSVLines, err := readLines(csvFile)
 	if err != nil {
 		log.Fatalf("readLines: %s", err)
 	}
