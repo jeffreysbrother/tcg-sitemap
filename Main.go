@@ -27,10 +27,29 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
-func main() {
-	// TODO: delete sitemaps dir if exists
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return true, err
+}
 
-	// read argument (file name)
+func main() {
+	// delete sitemaps dir if it already exists
+	directoryExists, err := exists("sitemaps")
+	if err != nil {
+		log.Println(err)
+	}
+
+	if directoryExists {
+		os.RemoveAll("sitemaps")
+	}
+
+	// retrieve file name from Args
 	csvFile := os.Args[1]
 
 	// TODO: handle error if user doesn't pass an arg or passes too many
