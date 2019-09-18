@@ -78,7 +78,9 @@ func main() {
 
 	// }
 
-	// add each sitemap to the sitemap index
+	// figure out a way to write the sitemap and sitemap index to files
+
+	// name the sitemap files appropriately
 
 	fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps, mapOfSitemapContents[0][2])
 	sitemapIndex.WriteTo(os.Stdout)
