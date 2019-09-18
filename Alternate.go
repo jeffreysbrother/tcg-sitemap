@@ -45,9 +45,6 @@ func main() {
 		totalSitemaps = completeBlocks
 	}
 
-	// sitemapCounter := 0
-	// arrayIndexCounter := 0
-
 	// create map of slices corresponding to each sitemap's content
 	mapOfSitemapContents := make(map[int][]string)
 	mapIndex := 0
@@ -66,32 +63,4 @@ func main() {
 	}
 
 	fmt.Println(countNames, completeBlocks, partialBlock, totalSitemaps, mapOfSitemapContents)
-
-	// var sitemapBlocks = make(map[int][]string, totalSitemaps)
-	// var keys []string
-
-	// populate map with sitemap content
-
-	// for k := range sitemapBlocks {
-	// 	fmt.Println(sitemapBlocks[k])
-	// }
-
-	// create sitemap
-	// sm := sitemap.New()
-
-	// // loop over slice of CSV file lines
-	// for _, line := range sliceOfCSVLines {
-	// 	sliceOfStrings := strings.Split(line, ",")
-	// 	sliceNames := sliceOfStrings[:len(sliceOfStrings)-1]
-	// 	formattedName := strings.Join(sliceNames, "-")
-
-	// 	url := fmt.Sprintf("https://www.truthfinder.com/people-search/%v/", strings.ToLower(formattedName))
-
-	// 	// add URL to sitemap
-	// 	sm.Add(&sitemap.URL{
-	// 		Loc: url,
-	// 	})
-	// }
-
-	// sm.WriteTo(os.Stdout)
 }
