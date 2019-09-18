@@ -128,5 +128,5 @@ func main() {
 		sm.WriteTo(f)
 	}
 
-	// TODO: write success message
+	fmt.Println("Sitemaps created!")
 }
