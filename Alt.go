@@ -68,6 +68,8 @@ func main() {
 		})
 	}
 
+	// TODO: write sitemap index to a file
+
 	// create a sitemap for every index of the map
 	// NOT SURE IF THIS IS WORKING
 	for _, el := range mapOfSitemapContents {
@@ -77,12 +79,9 @@ func main() {
 				Loc: innerEl,
 			})
 		}
+		// TODO: write individual sitemaps to files (with the above naving convention)
 		sm.WriteTo(os.Stdout)
 	}
-
-	// figure out a way to write the sitemap and sitemap index to files
-
-	// name the sitemap files appropriately
 
 	// fmt.Println(mapOfSitemapContents[0][2])
 	// sitemapIndex.WriteTo(os.Stdout)
