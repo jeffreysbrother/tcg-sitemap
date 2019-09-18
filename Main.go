@@ -50,9 +50,15 @@ func main() {
 	}
 
 	// retrieve file name from Args
-	csvFile := os.Args[1]
-
-	// TODO: handle error if user doesn't pass an arg or passes too many
+	// and handle error if user fails pass an arg or passes too many
+	var csvFile string
+	if len(os.Args) == 2 {
+		csvFile = os.Args[1]
+	} else if len(os.Args) < 2 {
+		log.Fatalf("Please include a file name as an argument")
+	} else {
+		log.Fatalf("Too many arguments!")
+	}
 
 	// read CSV file
 	sliceOfCSVLines, err := readLines(csvFile)
