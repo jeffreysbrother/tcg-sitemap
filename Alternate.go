@@ -53,10 +53,11 @@ func main() {
 	mapIndex := 0
 
 	for ind, el := range sliceOfCSVLines {
+		// formatting
 		sliceOfStrings := strings.Split(el, ",")
 		sliceNames := sliceOfStrings[:len(sliceOfStrings)-1]
-
 		url := fmt.Sprintf("%v/%v-%v/", baseURL, strings.ToLower(sliceNames[1]), strings.ToLower(sliceNames[0]))
+
 		if ind < (maxPerSitemap*mapIndex + maxPerSitemap) {
 			mapOfSitemapContents[mapIndex] = append(mapOfSitemapContents[mapIndex], url)
 		} else {
