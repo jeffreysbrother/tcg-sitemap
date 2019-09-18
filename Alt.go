@@ -69,22 +69,21 @@ func main() {
 	}
 
 	// create a sitemap for every index of the map
-	// THIS ISN'T WORKING !!!
-	// sitemapContainer := make(map[int]*sitemap)
-	// for i, el := range mapOfSitemapContents {
-	// 	sitemapContainer[i] = sitemap.New()
-	// 	for _, innerEl := range el {
-	// 		sitemapContainer[i].Add(&sitemap.URL{
-	// 			Loc: innerEl,
-	// 		})
-	// 		sitemapContainer[i].WriteTo(os.Stdout)
-	// 	}
-	// }
+	// NOT SURE IF THIS IS WORKING
+	for _, el := range mapOfSitemapContents {
+		sm := sitemap.New()
+		for _, innerEl := range el {
+			sm.Add(&sitemap.URL{
+				Loc: innerEl,
+			})
+		}
+		sm.WriteTo(os.Stdout)
+	}
 
 	// figure out a way to write the sitemap and sitemap index to files
 
 	// name the sitemap files appropriately
 
-	fmt.Println(mapOfSitemapContents[0][2])
-	sitemapIndex.WriteTo(os.Stdout)
+	// fmt.Println(mapOfSitemapContents[0][2])
+	// sitemapIndex.WriteTo(os.Stdout)
 }
