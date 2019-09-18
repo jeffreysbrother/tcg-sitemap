@@ -1,6 +1,6 @@
 # TCG-SITEMAP
 
-This program generates a series of sitemaps and a sitemap index which references those sitemaps from a single CSV file. The CSV file is expected to be formatted in the following way:
+This program generates a series of sitemaps and a sitemap index which references those sitemaps, from a single CSV file. The CSV file is expected to be formatted in the following way:
 
 ```
 {LASTNAME},{FIRSTNAME},{AVAILABLE_RECORDS}
