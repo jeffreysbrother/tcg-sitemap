@@ -45,12 +45,13 @@ func main() {
 	viper.AddConfigPath(".")
 	viper.SetConfigName("config")
 
-	err := viper.ReadInConfig() // Find and read the config file
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
+			log.Fatalf("config.yaml not found")
 		} else {
 			// Config file was found but another error was produced
+			log.Fatalf("There is an issue with your config.yaml file")
 		}
 	}
 
