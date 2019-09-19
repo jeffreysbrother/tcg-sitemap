@@ -71,3 +71,9 @@ This will produce a sitemap index named **sitemap.xml** structured like this:
 ## Usage
 
 Compile with `go build` and then run `./tcg-sitemap` in the project directory. Or, simply run `go run main.go {name-of-CSV-file}` in the project directory. The sitemap index and individual sitemaps will appear in the folder specified in **config.yaml**.
+
+## SEO Requirements
+
+- All URLs submitted in a XML Sitemap should have a **status of 200**
+- **URLs should be absolute** _not relative_ (ex absolute URL: https://www.yoursite.com/sample-url/)
+- After uploading to server, Sitemaps should be submitted to Google and Bing/Yahoo
