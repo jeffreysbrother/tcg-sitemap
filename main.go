@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -153,14 +152,4 @@ func main() {
 	fmt.Println("Sitemaps created!")
 
 	// TODO: read all files in /sitemaps dir and gzip individual sitemaps
-	files, err := ioutil.ReadDir(fmt.Sprintf("./%v", sitemapDir))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, file := range files {
-		if strings.Contains(file.Name(), sitemapPrefix.(string)) {
-			fmt.Println(file.Name())
-		}
-	}
 }
