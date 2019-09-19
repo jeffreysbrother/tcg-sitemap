@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -97,7 +98,7 @@ func main() {
 		sliceNames := sliceOfStrings[:len(sliceOfStrings)-1]
 		url := fmt.Sprintf("%v/%v-%v/", baseURL, strings.ToLower(sliceNames[1]), strings.ToLower(sliceNames[0]))
 
-		// limit # of records (blocks of 49,000)
+		// limit # of records (blocks of 49,999)
 		if ind < (maxPerSitemap*mapIndex + maxPerSitemap) {
 			mapOfSitemapContents[mapIndex] = append(mapOfSitemapContents[mapIndex], url)
 		} else {
@@ -150,4 +151,16 @@ func main() {
 	sitemapIndex.WriteTo(f)
 
 	fmt.Println("Sitemaps created!")
+
+	// TODO: read all files in /sitemaps dir and gzip individual sitemaps
+	files, err := ioutil.ReadDir(fmt.Sprintf("./%v", sitemapDir))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, file := range files {
+		if strings.Contains(file.Name(), sitemapPrefix.(string)) {
+			fmt.Println(file.Name())
+		}
+	}
 }
