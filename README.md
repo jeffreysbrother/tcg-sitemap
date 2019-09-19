@@ -32,7 +32,7 @@ sitemapPrefix : lol-
 sitemapSuffix : -sitemap.xml
 ```
 
-This will produce a sitemap index index like this:
+This will produce a sitemap index named **sitemap.xml** structured like this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ This will produce a sitemap index index like this:
 </sitemapindex>
 ```
 
-... and individual sitemaps like this:
+... and individual sitemaps (each named the same as the references above). It will be structured like this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
