@@ -1,6 +1,6 @@
 # TCG-SITEMAP
 
-This program generates a series of sitemaps and a sitemap index which references those sitemaps, from a single CSV file. The CSV file is expected to be located in the root directory and, in this example, is formatted in the following way:
+This program generates a series of gzipped sitemaps and a sitemap index which references those sitemaps, from a single CSV file. The CSV file is expected to be located in the root directory and, in this example, is formatted in the following way:
 
 ```
 {LASTNAME},{FIRSTNAME},{AVAILABLE_RECORDS}
@@ -29,10 +29,10 @@ Create a file in the root directory called **config.yaml**. The file should be s
 baseURL       : https://{yourDomain}
 sitemapDir    : sitemaps
 sitemapPrefix : lol-
-sitemapSuffix : -sitemap.xml
+sitemapSuffix : -sitemap.xml.gz
 ```
 
-This will produce a sitemap index named **sitemap.xml** structured like this:
+This tool gzips each individual sitemap. Therefore, "sitemapSuffix" must end with ".xml.gz". A configuration file such as this will produce a sitemap index named **sitemap.xml** structured like this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
