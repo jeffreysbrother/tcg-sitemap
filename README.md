@@ -20,6 +20,53 @@ PATEL,IRENE,24
 
 Each inidvidual sitemap will contain a max of 49,000 entires.
 
+## Configuration
+
+Create a file in the root directory called **config.yaml**. The file should be structured as follows:
+
+```
+baseURL       : https://www.{yourDomain}.com
+sitemapDir    : sitemaps
+sitemapPrefix : lol-
+sitemapSuffix : -sitemap.xml
+```
+
+This will produce a sitemap index index like this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>lol-0-sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>lol-1-sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>lol-2-sitemap.xml</loc>
+  </sitemap>
+  ...
+</sitemapindex>
+```
+
+... and individual sitemaps like this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+  </url>
+  <url>
+    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+  </url>
+  <url>
+    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+  </url>
+  ...
+</urlset>
+```
+
 ## Usage
 
-After compiling, run `./tcg-sitemap` in the project directory. The sitemap index and sitemaps will appear in a folder named **/sitemaps**.
+After compiling, run `./tcg-sitemap` in the project directory. The sitemap index and sitemaps will appear in the folder specified in **config.yaml**.

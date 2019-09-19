@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/snabb/sitemap"
+	"github.com/spf13/viper"
 )
 
-var baseURL = "https://www.truthfinder.com/people-search"
 var maxPerSitemap = 49999
 var arguments = os.Args
 
@@ -41,6 +41,24 @@ func dirExists(path string) (bool, error) {
 }
 
 func main() {
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath(".")
+	viper.SetConfigName("config")
+
+	err := viper.ReadInConfig() // Find and read the config file
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
+			// Config file not found; ignore error if desired
+		} else {
+			// Config file was found but another error was produced
+		}
+	}
+
+	baseURL := viper.Get("baseURL")
+	sitemapPrefix := viper.Get("sitemapPrefix")
+	sitemapSuffix := viper.Get("sitemapSuffix")
+	sitemapDir := viper.Get("sitemapDir")
+
 	// delete sitemaps dir if it already exists
 	directoryExists, err := dirExists("sitemaps")
 	if err != nil {
@@ -96,7 +114,7 @@ func main() {
 	}
 
 	// create sitemap index file
-	f, err := os.Create("sitemaps/sitemap.xml")
+	f, err := os.Create(fmt.Sprintf("%v/sitemap.xml", sitemapDir))
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -104,9 +122,8 @@ func main() {
 
 	for key, el := range mapOfSitemapContents {
 		// add entries to sitemap index
-		// naming convention of entries: icm-ppl10-sitemap.xml
 		sitemapIndex.Add(&sitemap.URL{
-			Loc: fmt.Sprintf("icm-ppl%v-sitemap.xml", key),
+			Loc: fmt.Sprintf("%v%v%v", sitemapPrefix, key, sitemapSuffix),
 		})
 
 		// create a sitemap for every index of the map
@@ -117,8 +134,8 @@ func main() {
 			})
 		}
 
-		// create individual sitemap files (with the above naving convention)
-		f, err := os.Create(fmt.Sprintf("sitemaps/icm-ppl%v-sitemap.xml", key))
+		// create individual sitemap files in appropriate dir (ensure that this matches name of files created above)
+		f, err := os.Create(fmt.Sprintf("%v/%v%v%v", sitemapDir, sitemapPrefix, key, sitemapSuffix))
 		if err != nil {
 			fmt.Println(err)
 			return
