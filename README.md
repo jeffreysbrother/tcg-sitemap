@@ -29,10 +29,12 @@ Create a file in the root directory called **config.yaml**. The file should be s
 baseURL       : https://{yourDomain}
 sitemapDir    : sitemaps
 sitemapPrefix : lol-
-sitemapSuffix : -sitemap.xml.gz
+sitemapSuffix : -sitemap.xml
 ```
 
-This tool gzips each individual sitemap. Therefore, "sitemapSuffix" must end with ".xml.gz". A configuration file such as this will produce a sitemap index named **sitemap.xml** structured like this:
+**Note:** In this example, the valud of `sitemapSuffix` is "-sitemap.xml". However, the gzipping process will produce files and references to those files with suffixes such as "-sitemap.xml.gz".
+
+A configuration file such as this will produce a sitemap index named **sitemap.xml** structured like this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
