@@ -25,7 +25,7 @@ Each inidvidual sitemap will contain a max of 49,000 entires.
 Create a file in the root directory called **config.yaml**. The file should be structured as follows:
 
 ```
-baseURL       : https://www.{yourDomain}.com
+baseURL       : https://{yourDomain}
 sitemapDir    : sitemaps
 sitemapPrefix : lol-
 sitemapSuffix : -sitemap.xml
@@ -55,13 +55,13 @@ This will produce a sitemap index index like this:
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+    <loc>https://{yourDomain}/{firstname}-{lastname}/</loc>
   </url>
   <url>
-    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+    <loc>https://{yourDomain}/{firstname}-{lastname}/</loc>
   </url>
   <url>
-    <loc>https://{yourDomain}/{firstname}-{last-name}/</loc>
+    <loc>https://{yourDomain}/{firstname}-{lastname}/</loc>
   </url>
   ...
 </urlset>
