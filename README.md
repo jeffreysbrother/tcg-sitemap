@@ -19,7 +19,7 @@ PATEL,IRENE,24
 ```
 As currently configured, this tool will ignore **,{AVAILABLE_RECORDS}** since this bit of information is irrelevant in this example (the URLs we intend to generate only rely on **{LASTNAME}** AND **{FIRSTNAME}**).
 
-Each inidvidual sitemap will contain a max of 49,000 entires.
+Each inidvidual sitemap will contain a max of 49,999 entires.
 
 ## Configuration
 
