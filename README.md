@@ -32,7 +32,7 @@ sitemapPrefix : lol-
 sitemapSuffix : -sitemap.xml
 ```
 
-**Note:** In this example, the valud of `sitemapSuffix` is "-sitemap.xml". However, the gzipping process will produce files and references to those files with suffixes such as "-sitemap.xml.gz".
+**Note:** In this example, the value of `sitemapSuffix` is "-sitemap.xml". However, the gzipping process will produce files and references to those files with suffixes such as "-sitemap.xml.gz".
 
 A configuration file such as this will produce a sitemap index named **sitemap.xml** structured like this:
 
