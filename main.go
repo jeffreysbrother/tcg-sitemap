@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/snabb/sitemap"
@@ -149,7 +151,24 @@ func main() {
 	// write to sitemap index after it's been populated with entries
 	sitemapIndex.WriteTo(f)
 
-	fmt.Println("Sitemaps created!")
+	fmt.Println("Sitemaps created")
 
-	// TODO: read all files in /sitemaps dir and gzip individual sitemaps
+	// gzip individual sitemaps
+	files, err := ioutil.ReadDir(fmt.Sprintf("./%v", sitemapDir))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, file := range files {
+		// exclude sitemap index from being gzipped (only perform if file contains specified prefix)
+		if strings.Contains(file.Name(), sitemapPrefix.(string)) {
+			cmd := exec.Command("gzip", fmt.Sprintf("%v/%v", sitemapDir, file.Name()))
+			err := cmd.Run()
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
+
+	fmt.Println("Sitemaps gzipped")
 }
