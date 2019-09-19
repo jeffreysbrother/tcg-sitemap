@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -126,7 +127,7 @@ func main() {
 	for key, el := range mapOfSitemapContents {
 		// add entries to sitemap index
 		sitemapIndex.Add(&sitemap.URL{
-			Loc: fmt.Sprintf("%v%v%v", sitemapPrefix, key, sitemapSuffix),
+			Loc: fmt.Sprintf("%v%v%v.gz", sitemapPrefix, key, sitemapSuffix),
 		})
 
 		// create a sitemap for every index of the map
@@ -163,9 +164,12 @@ func main() {
 		// exclude sitemap index from being gzipped (only perform if file contains specified prefix)
 		if strings.Contains(file.Name(), sitemapPrefix.(string)) {
 			cmd := exec.Command("gzip", fmt.Sprintf("%v/%v", sitemapDir, file.Name()))
+			var stderr bytes.Buffer
+			cmd.Stderr = &stderr
 			err := cmd.Run()
 			if err != nil {
-				log.Fatal(err)
+				fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+				return
 			}
 		}
 	}
