@@ -162,7 +162,7 @@ func main() {
 
 	for _, file := range files {
 		// exclude sitemap index from being gzipped (only perform if file contains specified prefix)
-		if strings.Contains(file.Name(), sitemapPrefix.(string)) {
+		if strings.HasPrefix(file.Name(), sitemapPrefix.(string)) {
 			cmd := exec.Command("gzip", fmt.Sprintf("%v/%v", sitemapDir, file.Name()))
 			var stderr bytes.Buffer
 			cmd.Stderr = &stderr
