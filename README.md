@@ -72,4 +72,4 @@ A configuration file such as this will produce a sitemap index named **sitemap.x
 
 ## Usage
 
-Compile with `go build` and then run `./tcg-sitemap` in the project directory. Or, simply run `go run main.go {name-of-CSV-file}` in the project directory. The sitemap index and individual sitemaps will appear in the folder specified in **config.yaml**.
+Compile with `go build` and then run `./tcg-sitemap {filename}` in the project directory. Or, simply run `go run main.go {filename}` in the project directory. The sitemap index and individual sitemaps will appear in the folder specified in **config.yaml**.
